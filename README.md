@@ -6,3 +6,6 @@ This repository will be used to monitor the health of https://pdap.io/, send ale
 
 * `WEBHOOK_URL`: The Webhook URL for posting to discord. Message staff for access to it if not known.
 
+## Requirements
+
+To install this repository, run `pip install -r requirements.txt`.
