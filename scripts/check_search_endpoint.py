@@ -1,8 +1,8 @@
 import requests
 import json
 
-from scripts.constants import BASE_URL
-from scripts.webhook_logic import post_to_discord
+from constants import BASE_URL
+from webhook_logic import post_to_discord
 
 def check_search_endpoint():
     url = f"{BASE_URL}/search-tokens"
