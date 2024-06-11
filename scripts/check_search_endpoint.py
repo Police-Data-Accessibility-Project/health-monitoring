@@ -18,7 +18,7 @@ def check_search_endpoint():
 
         data = response.json()["data"]
         if len(data) > 0:
-            print("Search endpoint is functioning as expected.")
+            print("HEALTH_MONITORING: Search endpoint is functioning as expected.")
         else:
             post_to_discord("Search endpoint returned unexpected results.")
     except requests.RequestException as e:
