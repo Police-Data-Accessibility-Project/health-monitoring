@@ -2,6 +2,7 @@ import requests
 import json
 
 from scripts.constants import BASE_URL
+from scripts.webhook_logic import post_to_discord
 
 def check_search_endpoint():
     url = f"{BASE_URL}/search-tokens"
@@ -19,13 +20,9 @@ def check_search_endpoint():
         if len(data) > 0:
             print("Search endpoint is functioning as expected.")
         else:
-            print("Search endpoint returned unexpected results.")
-            # Trigger an alert or log the issue
+            post_to_discord("Search endpoint returned unexpected results.")
     except requests.RequestException as e:
-        print(f"Search endpoint check failed: {e}")
-        # Trigger an alert or log the issue
+        post_to_discord(f"Search endpoint check failed: {e}")
 
 if __name__ == "__main__":
     check_search_endpoint()
-    # reset_password("maxachis@gmail.com")
-    # create_user("maxachis@gmail.com", "BaklavaBoysBurnishingBrocolli")
