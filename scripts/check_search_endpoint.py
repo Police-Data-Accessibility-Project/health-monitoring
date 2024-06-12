@@ -27,7 +27,7 @@ def check_search_endpoint():
             msg = "Search endpoint returned an empty response."
             logger.error(msg)
             post_to_discord(msg)
-    except requests.RequestException as e:
+    except Exception as e:
         msg = f"Search endpoint check failed: {e}"
         logger.error(msg)
         post_to_discord(msg)
