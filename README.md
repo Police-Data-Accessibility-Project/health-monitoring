@@ -1,6 +1,10 @@
 # Health Monitoring
 
-This repository will be used to monitor the health of https://pdap.io/, send alerts when errors are detected, and, where necessary, perform corrective actions. 
+This repository is used to monitor the health of https://pdap.io/, send alerts when errors are detected, and, where necessary, perform corrective actions.
+
+## Logging
+
+The script will log to a file named health_monitoring.log in the root directory. These logs are designed to rotate every day at midnight.
 
 ## Installation
 
