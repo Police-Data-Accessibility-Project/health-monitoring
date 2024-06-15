@@ -4,7 +4,7 @@ import logging
 
 from logging_logic import setup_logger
 from constants import BASE_URL
-from webhook_logic import post_to_discord, DiscordPoster
+from webhook_logic import DiscordPoster
 
 
 def check_search_endpoint():
