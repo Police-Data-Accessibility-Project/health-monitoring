@@ -1,3 +1,6 @@
+import os
+
+import dotenv
 import requests
 import json
 import logging
@@ -7,8 +10,8 @@ from constants import BASE_URL
 from webhook_logic import DiscordPoster
 
 
-def check_search_endpoint():
-    discord_poster = DiscordPoster()
+def check_search_endpoint(webhook_url: str):
+    discord_poster = DiscordPoster(webhook_url)
     logger = setup_logger()
     try:
         response = requests.get(
@@ -45,4 +48,6 @@ def get_search_query():
 
 
 if __name__ == "__main__":
-    check_search_endpoint()
+    dotenv.load_dotenv()
+    webhook_url = os.getenv("WEBHOOK_URL")
+    check_search_endpoint(webhook_url)

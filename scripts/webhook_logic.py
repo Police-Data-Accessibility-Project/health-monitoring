@@ -5,13 +5,12 @@ import requests
 import dotenv
 
 class DiscordPoster:
-    def __init__(self):
+    def __init__(self, webhook_url: str):
         dotenv.load_dotenv()
-        self.webhook_url = os.getenv("WEBHOOK_URL")
-        if not self.webhook_url:
+        if not webhook_url:
             logging.error("WEBHOOK_URL environment variable not set")
             raise ValueError("WEBHOOK_URL environment variable not set")
-
+        self.webhook_url = webhook_url
     def post_to_discord(self, message):
         requests.post(self.webhook_url, json={"content": message})
 
