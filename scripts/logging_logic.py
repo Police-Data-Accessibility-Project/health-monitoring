@@ -21,8 +21,13 @@ def setup_logger() -> logging.Logger:
     logger = logging.getLogger("HourlyLogger")
     logger.setLevel(logging.INFO)
 
-    # Create a handler that rotates logs every day
-    handler = TimedRotatingFileHandler(log_path, when="midnight", interval=1, backupCount=1)
+    # Create a handler that rotates logs weekly on Monday
+    weekly_on_monday = "W0"
+    handler = TimedRotatingFileHandler(
+        filename=log_path,
+        when=weekly_on_monday,
+        backupCount=1
+    )
     handler.suffix = "%Y-%m-%d"
 
     # Create a formatter and set it for the handler
