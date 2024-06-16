@@ -43,3 +43,36 @@ chmod +x run.sh
 ```
 ./run.sh
 ```
+
+# Verifying Functionality
+
+All verification will need to be performed within the Automation Manager Droplet, in the `health-monitoring` directory, accessible from the home directory. The Automation Manager can be accessed via SSHing into the Droplet.
+
+## Verifying recent script operation
+
+Within the `health-monitoring` directory, run:
+
+```shell
+cat health_monitoring.log
+```
+
+This should show up in the terminal. The log should show results such as:
+
+```text
+2024-06-15 17:00:06,452 - INFO - Search endpoint is functioning as expected.
+2024-06-15 18:00:06,097 - INFO - Search endpoint is functioning as expected.
+2024-06-15 19:00:05,291 - INFO - Search endpoint is functioning as expected.
+```
+
+The timestamps should always show activity within the last hour. In the case of errors, these should also be logged within this file.
+
+## Verifying Discord Functionality
+
+From the `scripts` directory, with the virtual environment mentioned in the `run.sh` script activate, run:
+
+```shell
+python3 scripts/webhook_logic.py
+```
+
+This will post the message "Testing from health-monitoring" to the Webhook URL in the .env file, which should show up in the `private/#dev-alerts` in the Discord.
+
