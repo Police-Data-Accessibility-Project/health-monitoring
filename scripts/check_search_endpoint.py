@@ -30,6 +30,7 @@ def check_search_endpoint(webhook_url: str):
             msg = "Search endpoint returned an empty response."
             logger.error(msg)
             discord_poster.post_to_discord(msg)
+            sms_notifier.send_sms(msg)
     except Exception as e:
         msg = f"Search endpoint check failed: {e}"
         logger.error(msg)
