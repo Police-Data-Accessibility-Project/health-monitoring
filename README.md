@@ -29,7 +29,9 @@ cd health-monitoring
 The app should have a WEBHOOK URL environment variable. Reach out to contact@pdap.io or make noise in Discord if you'd like access to this key
 
 ```env
-WEBHOOK_URL=<YOUR_WEBHOOK_URL>
+WEBHOOK_URL=<Discord webhook URL>
+TEXTBELT_API_KEY=<API key>
+SMS_NUMBER=<RECIPIENT>
 ```
 
 ### Modify permissions for run.sh
