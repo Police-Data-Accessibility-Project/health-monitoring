@@ -29,7 +29,8 @@ class SMSNotifier:
         data = {
             'phone': self.to_phone_number,
             'message': message,
-            'key': self.textbelt_api_key
+            'key': self.textbelt_api_key,
+            'sender': 'Police Data Accessibility Project'
         }
         response = requests.post(self.textbelt_api_url, data=data)
         logging.info(f'SMS sent with response: {response.json()}')
