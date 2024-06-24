@@ -24,8 +24,6 @@ def check_search_endpoint(webhook_url: str):
         data = response.json()["data"]
         if len(data) > 0:
             logger.info("Search endpoint is functioning as expected.")
-            msg = ("Testing SMS")
-            sms_notifier.send_sms(msg)
         else:
             msg = "Search endpoint returned an empty response."
             logger.error(msg)
