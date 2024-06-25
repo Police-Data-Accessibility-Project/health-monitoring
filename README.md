@@ -2,7 +2,7 @@
 
 This repository is used to monitor the health of https://pdap.io/, send alerts when errors are detected, and, where necessary, perform corrective actions.
 
-It is designed to function within the Automation Manager Digital Ocean Droplet.
+It is designed to function within the Automation Manager Digital Ocean Droplet. It's deployed to https://automation.pdap.io
 
 ## How it works
 
@@ -26,11 +26,16 @@ cd health-monitoring
 
 ### Create a file named .env in the root directory containing secrets for the Webhook URL.
 
-The app should have a WEBHOOK URL environment variable. Reach out to contact@pdap.io or make noise in Discord if you'd like access to this key
+The app needs access to these variables. Reach out to contact@pdap.io or make noise in Discord if you'd like access.
 
 ```env
 WEBHOOK_URL=<YOUR_WEBHOOK_URL>
+TEXTBELT_API_KEY=<YOUR_API_KEY>
+SMS_NUMBER=<NOTIFICATION_RECIPIENT_PHONE>
 ```
+
+When deployed, these variables can be managed in the build environment: http://automation.pdap.io/job/Health-Monitor/configure
+
 
 ### Modify permissions for run.sh
 
