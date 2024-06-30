@@ -18,6 +18,7 @@ pipeline {
             steps {
                 echo 'Running health checks...'
                 sh 'python scripts/check_search_endpoint.py'
+                archiveArtifacts artifacts: 'health_monitoring.log', allowEmptyArchive: true
                 // No need to run the script explicitly, as the CMD in the Dockerfile will handle it
             }
         }
