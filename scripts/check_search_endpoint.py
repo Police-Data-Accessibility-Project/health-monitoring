@@ -7,11 +7,12 @@ import logging
 
 from logging_logic import setup_logger
 from constants import BASE_URL
-from webhook_logic import DiscordPoster
+from webhook_logic import DiscordPoster, SMSNotifier
 
 
 def check_search_endpoint(webhook_url: str):
     discord_poster = DiscordPoster(webhook_url)
+    sms_notifier = SMSNotifier()
     logger = setup_logger()
     try:
         response = requests.get(
@@ -27,10 +28,12 @@ def check_search_endpoint(webhook_url: str):
             msg = "Search endpoint returned an empty response."
             logger.error(msg)
             discord_poster.post_to_discord(msg)
+            sms_notifier.send_sms(msg)
     except Exception as e:
         msg = f"Search endpoint check failed: {e}"
         logger.error(msg)
         discord_poster.post_to_discord(msg)
+        sms_notifier.send_sms(msg)
 
 
 def get_url():
