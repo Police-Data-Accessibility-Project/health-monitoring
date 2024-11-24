@@ -1,2 +1,2 @@
 
-BASE_URL = "https://data-sources.pdap.io/api"
+BASE_URL = "https://data-sources-v2.pdap.io/api"
