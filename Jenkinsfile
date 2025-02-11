@@ -24,7 +24,7 @@ pipeline {
         failure {
             script {
                 def payload = """{
-                    "content": "🚨 Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    "content": "🚨 Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
                 }"""
 
                 sh """
