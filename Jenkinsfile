@@ -16,9 +16,7 @@ pipeline {
     stages {
         stage('Run health checks') {
             steps {
-                echo 'Running health checks...'
-                sh 'python scripts/check_search_endpoint.py'
-                archiveArtifacts artifacts: 'health_monitoring.log', allowEmptyArchive: true
+                sh 'exit 1'  // Simulate a failure
             }
         }
     }
