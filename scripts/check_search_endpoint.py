@@ -7,28 +7,13 @@ import logging
 
 from logging_logic import setup_logger
 from constants import BASE_URL
+from scripts.Notifier import MasterNotifier
 from webhook_logic import DiscordPoster, SMSNotifier
 
 ENDPOINT_NAME = "Typeahead"
 
-class Notifier:
-    def __init__(self, webhook_url: str, notify=True):
-        self.webhook_url = webhook_url
-        self.logger = setup_logger()
-        self.notify = notify
-
-    def handle_error(self, msg: str):
-        self.logger.error(msg)
-        if self.notify:
-            DiscordPoster(self.webhook_url).post_to_discord(msg)
-            SMSNotifier().send_sms(msg)
-
-    def info(self, msg: str):
-        self.logger.info(msg)
-
-
-def check_search_endpoint(webhook_url: str, notify=True):
-    notifier = Notifier(webhook_url=webhook_url, notify=notify)
+def check_search_endpoint(notifier: MasterNotifier):
+    print(f"Checking {ENDPOINT_NAME} endpoint...")
     try:
         response = requests.get(
             url=get_url(),
@@ -38,7 +23,7 @@ def check_search_endpoint(webhook_url: str, notify=True):
         evaluate_response(data, notifier)
     except Exception as e:
         msg = f"{ENDPOINT_NAME} endpoint check failed: {e}"
-        notifier.handle_error(msg)
+        notifier.notify(msg)
 
 
 def evaluate_response(data, notifier):
@@ -58,4 +43,8 @@ def get_url():
 if __name__ == "__main__":
     dotenv.load_dotenv()
     webhook_url = os.getenv("WEBHOOK_URL")
-    check_search_endpoint(webhook_url, notify=False)
+    notifier = MasterNotifier(
+        discord_poster=DiscordPoster(webhook_url),
+        sms_notifier=SMSNotifier()
+    )
+    check_search_endpoint(notifier)
