@@ -2,12 +2,9 @@ import os
 
 import dotenv
 import requests
-import json
-import logging
 
-from logging_logic import setup_logger
 from constants import BASE_URL
-from scripts.Notifier import MasterNotifier
+from Notifier import MasterNotifier
 from webhook_logic import DiscordPoster, SMSNotifier
 
 ENDPOINT_NAME = "Typeahead"

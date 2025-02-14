@@ -1,5 +1,5 @@
-from scripts.logging_logic import setup_logger
-from scripts.webhook_logic import SMSNotifier, DiscordPoster
+from logging_logic import setup_logger
+from webhook_logic import SMSNotifier, DiscordPoster
 
 
 class MasterNotifier:

@@ -3,9 +3,9 @@ import os
 import dotenv
 from playwright.sync_api import sync_playwright
 
-from scripts.Notifier import MasterNotifier
-from scripts.logging_logic import setup_logger
-from scripts.webhook_logic import DiscordPoster, SMSNotifier
+from Notifier import MasterNotifier
+from logging_logic import setup_logger
+from webhook_logic import DiscordPoster, SMSNotifier
 
 URL = "https://pdap.io"
 
