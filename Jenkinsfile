@@ -17,8 +17,21 @@ pipeline {
         stage('Run health checks') {
             steps {
                 echo 'Running health checks...'
-                sh 'python scripts/check_search_endpoint.py'
+                sh 'python scripts/HealthMonitor.py'
                 archiveArtifacts artifacts: 'health_monitoring.log', allowEmptyArchive: true
+            }
+        }
+    }
+    post {
+        failure {
+            script {
+                def payload = """{
+                    "content": "🚨 Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}"
+                }"""
+
+                sh """
+                curl -X POST -H "Content-Type: application/json" -d '${payload}' ${env.WEBHOOK_URL}
+                """
             }
         }
     }
