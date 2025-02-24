@@ -15,6 +15,7 @@ class DiscordPoster:
         requests.post(self.webhook_url, json={"content": message})
 
 class SMSNotifier:
+
     def __init__(self):
         dotenv.load_dotenv()
         self.textbelt_api_url = os.getenv('TEXTBELT_API_URL', 'https://textbelt.com/text')
