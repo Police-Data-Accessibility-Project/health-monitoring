@@ -57,12 +57,13 @@ def fill_search_box(page):
         raise CheckWebpageError(f"❌ Failed to fill the search box: {e}")
 
 def select_allegheny_pa(page):
+    text = 'Allegheny, Pennsylvania'
     try:
         page.wait_for_selector('.pdap-typeahead-list')
-        page.click('.pdap-typeahead-list-item:has-text("Allegheny, PA")')
-        print("✅ Successfully selected 'Allegheny, PA'.")
+        page.click(f'.pdap-typeahead-list-item:has-text("{text}")')
+        print(f"✅ Successfully selected '{text}'.")
     except Exception as e:
-        raise CheckWebpageError(f"❌ Failed to select 'Allegheny, PA': {e}")
+        raise CheckWebpageError(f"❌ Failed to select '{text}': {e}")
 
 def click_search_button(page):
     try:
