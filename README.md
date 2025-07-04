@@ -9,8 +9,6 @@ It is designed to function within the Automation Manager Digital Ocean Droplet. 
 The script will check the status of the search endpoint. 
 If the endpoint is not functioning as expected, it will send an alert to the PDAP Discord, within the `private/#dev-alerts` channel.
 
-Within the Automation Manager, a cron job is set up to run the `run.sh` script, which will automatically pull the latest changes, install any requirements, and run the script from a virtual environment.
-
 ### Logging
 
 The script will log to a file named health_monitoring.log in the root directory. These logs are designed to rotate every day at midnight.
@@ -37,18 +35,6 @@ SMS_NUMBER=<NOTIFICATION_RECIPIENT_PHONE>
 When deployed, these variables can be managed in the build environment: http://automation.pdap.io/job/Health-Monitor/configure
 
 
-### Modify permissions for run.sh
-
-```
-chmod +x run.sh
-```
-
-### Run the script
-
-```
-./run.sh
-```
-
 # Verifying Functionality
 
 All verification will need to be performed within the Automation Manager Droplet, in the `health-monitoring` directory, accessible from the home directory. The Automation Manager can be accessed via SSHing into the Droplet.
@@ -73,10 +59,10 @@ The timestamps should always show activity within the last hour. In the case of 
 
 ## Verifying Discord Functionality
 
-From the `scripts` directory, with the virtual environment mentioned in the `run.sh` script activate, run:
+From the `scripts` directory, within the appropriate environment, run:
 
 ```shell
-python3 scripts/webhook_logic.py
+python3 src/sms.py
 ```
 
 This will post the message "Testing from health-monitoring" to the Webhook URL in the .env file, which should show up in the `private/#dev-alerts` in the Discord.

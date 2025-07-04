@@ -1,13 +1,8 @@
-import os
-
-import dotenv
 import requests
 
-from constants import BASE_URL
-from Notifier import MasterNotifier
-from webhook_logic import DiscordPoster, SMSNotifier
+from src.check_search.endpoint.constants import ENDPOINT_NAME, BASE_URL
+from src.notifier.master import MasterNotifier
 
-ENDPOINT_NAME = "Typeahead"
 
 def check_search_endpoint(notifier: MasterNotifier):
     print(f"Checking {ENDPOINT_NAME} endpoint...")
@@ -23,12 +18,12 @@ def check_search_endpoint(notifier: MasterNotifier):
         notifier.notify(msg)
 
 
-def evaluate_response(data, notifier):
+def evaluate_response(data: list, notifier: MasterNotifier):
     if len(data) > 0:
         notifier.info(f"{ENDPOINT_NAME} endpoint is functioning as expected.")
     else:
         msg = f"{ENDPOINT_NAME} endpoint returned an empty response."
-        notifier.handle_error(msg)
+        notifier.notify(msg)
 
 
 def get_url():
@@ -36,12 +31,3 @@ def get_url():
     return url
 
 
-
-if __name__ == "__main__":
-    dotenv.load_dotenv()
-    webhook_url = os.getenv("WEBHOOK_URL")
-    notifier = MasterNotifier(
-        discord_poster=DiscordPoster(webhook_url),
-        sms_notifier=SMSNotifier()
-    )
-    check_search_endpoint(notifier)

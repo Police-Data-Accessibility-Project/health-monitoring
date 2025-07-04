@@ -1,0 +1,1 @@
+Contains logic for checking endpoints -- currently only the search endpoint

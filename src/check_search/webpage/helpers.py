@@ -1,31 +1,7 @@
-import os
-
-import dotenv
 from playwright.sync_api import sync_playwright
 
-from Notifier import MasterNotifier
-from logging_logic import setup_logger
-from webhook_logic import DiscordPoster, SMSNotifier
-
-URL = "https://pdap.io"
-
-class CheckWebpageError(Exception):
-    pass
-
-class WebpageChecker:
-
-    def __init__(self, notifier: MasterNotifier):
-        self.logger = setup_logger()
-        self.notifier = notifier
-
-    def check_webpage(self):
-        print(f"Checking search webpage logic...")
-        try:
-            check_search_webpage()
-        except Exception as e:
-            msg = f"❌ Webpage check failed: {e}"
-            self.logger.error(msg)
-            self.notifier.notify(msg)
+from src.check_search.webpage.constants import URL, NETWORK_IDLE, TIMEOUT_MILLISECONDS
+from src.check_search.webpage.exceptions import CheckWebpageError
 
 
 def check_search_webpage():
@@ -43,15 +19,15 @@ def check_search_webpage():
 def navigate_to_page(page):
     try:
         page.goto(URL)
-        page.wait_for_load_state('networkidle', timeout=10000)
+        page.wait_for_load_state(NETWORK_IDLE, timeout=TIMEOUT_MILLISECONDS)
         print("✅ Successfully loaded the webpage.")
     except Exception as e:
-        raise CheckWebpageError(f"❌ Failed to load webpage: {e}")
+        raise CheckWebpageError(f"❌ Failed to load webpage '{URL}': {e}")
 
 def fill_search_box(page):
     try:
         page.fill('input[id="pdap-search-typeahead"]', 'Pittsburgh')
-        page.wait_for_load_state('networkidle', timeout=10000)
+        page.wait_for_load_state(NETWORK_IDLE, timeout=TIMEOUT_MILLISECONDS)
         print("✅ Successfully filled the search box.")
     except Exception as e:
         raise CheckWebpageError(f"❌ Failed to fill the search box: {e}")
@@ -68,7 +44,7 @@ def select_allegheny_pa(page):
 def click_search_button(page):
     try:
         page.click('button:has-text("Search")')
-        page.wait_for_load_state('networkidle', timeout=10000)
+        page.wait_for_load_state(NETWORK_IDLE, timeout=TIMEOUT_MILLISECONDS)
         print("✅ Successfully clicked Search button.")
     except Exception as e:
         raise CheckWebpageError(f"❌ Failed to click Search button: {e}")
@@ -91,7 +67,7 @@ def confirm_crime_statistics_page(page):
 def click_next(page):
     try:
         page.click('a:has-text("NEXT")')
-        page.wait_for_load_state('networkidle', timeout=10000)
+        page.wait_for_load_state(NETWORK_IDLE, timeout=TIMEOUT_MILLISECONDS)
         print("✅ Successfully clicked NEXT.")
     except Exception as e:
         raise CheckWebpageError(f"❌ Failed to click NEXT: {e}")
@@ -116,12 +92,3 @@ def check_search_webpage_inner_logic(page):
 
 
 
-if __name__ == "__main__":
-    dotenv.load_dotenv()
-    webhook_url = os.getenv("WEBHOOK_URL")
-    notifier = MasterNotifier(
-        discord_poster=DiscordPoster(webhook_url),
-        sms_notifier=SMSNotifier()
-    )
-    wc = WebpageChecker(notifier)
-    wc.check_webpage()
