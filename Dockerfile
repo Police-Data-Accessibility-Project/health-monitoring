@@ -7,7 +7,6 @@ ENV PYTHONUNBUFFERED=1
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies
-ENV UV_PROJECT_ENVIRONMENT="/usr/local/"
 RUN uv sync --locked --no-dev
 
 COPY . .
