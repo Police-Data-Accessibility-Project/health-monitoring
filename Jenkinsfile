@@ -17,7 +17,7 @@ pipeline {
         stage('Run health checks') {
             steps {
                 echo 'Running health checks...'
-                sh '/venv/bin/python src/main.py'
+                sh '/.venv/bin/python src/main.py'
                 archiveArtifacts artifacts: 'health_monitoring.log', allowEmptyArchive: true
             }
         }
