@@ -1,0 +1,5 @@
+LOG_FILENAME = "health_monitoring.log"
+LOGGER_NAME = "HourlyLogger"
+WEEKLY_ON_MONDAY = "W0"
+HANDLER_SUFFIX = "%Y-%m-%d"
+LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"

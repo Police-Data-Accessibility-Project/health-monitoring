@@ -47,6 +47,18 @@ wheels = [
 ]
 
 [[package]]
+name = "discord-poster"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/5c/5f/af2d2b24f9afddebbb258b3b82c58439f0b0a91f0649af34475fbacd39f9/discord_poster-0.1.0.tar.gz", hash = "sha256:3768689a91bb59250c8b1e580903562b041ddd8ed2856abfdaaa88476817be20", size = 2385, upload_time = "2025-04-28T19:19:28.036Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/01/fe/89f5acd8b0ad8f901792dcc5fd689e537ea373d45d55060d2a0d92648335/discord_poster-0.1.0-py3-none-any.whl", hash = "sha256:eef212ad2454669575a67c702c07a1fddc92334fd17f0ed7881ef25a7880237e", size = 3181, upload_time = "2025-04-28T19:19:26.584Z" },
+]
+
+[[package]]
 name = "environs"
 version = "14.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -97,6 +109,7 @@ name = "health-monitoring"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "discord-poster" },
     { name = "environs" },
     { name = "playwright" },
     { name = "requests" },
@@ -104,6 +117,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "discord-poster", specifier = ">=0.1.0" },
     { name = "environs", specifier = ">=14.2.0" },
     { name = "playwright", specifier = ">=1.53.0" },
     { name = "requests", specifier = ">=2.32.4" },

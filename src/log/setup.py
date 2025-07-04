@@ -5,6 +5,8 @@ import logging
 import os
 from logging.handlers import TimedRotatingFileHandler
 
+from src.log.constants import LOG_FILENAME, LOGGER_NAME, WEEKLY_ON_MONDAY, HANDLER_SUFFIX, LOG_FORMAT
+
 
 def setup_logger() -> logging.Logger:
     """
@@ -15,23 +17,22 @@ def setup_logger() -> logging.Logger:
     parent_dir = os.path.dirname(current_dir)
 
     # Set the log path in the parent directory
-    log_path = os.path.join(parent_dir, "health_monitoring.log")
+    log_path = os.path.join(parent_dir, LOG_FILENAME)
 
     # Create a logger
-    logger = logging.getLogger("HourlyLogger")
+    logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(logging.INFO)
 
     # Create a handler that rotates logs weekly on Monday
-    weekly_on_monday = "W0"
     handler = TimedRotatingFileHandler(
         filename=log_path,
-        when=weekly_on_monday,
+        when=WEEKLY_ON_MONDAY,
         backupCount=1
     )
-    handler.suffix = "%Y-%m-%d"
+    handler.suffix = HANDLER_SUFFIX
 
     # Create a formatter and set it for the handler
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter(LOG_FORMAT)
     handler.setFormatter(formatter)
 
     # Add the handler to the logger

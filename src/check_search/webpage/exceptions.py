@@ -1,0 +1,2 @@
+class CheckWebpageError(Exception):
+    pass

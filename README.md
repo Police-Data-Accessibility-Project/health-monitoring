@@ -62,7 +62,7 @@ The timestamps should always show activity within the last hour. In the case of 
 From the `scripts` directory, within the appropriate environment, run:
 
 ```shell
-python3 src/webhook_logic.py
+python3 src/sms.py
 ```
 
 This will post the message "Testing from health-monitoring" to the Webhook URL in the .env file, which should show up in the `private/#dev-alerts` in the Discord.
