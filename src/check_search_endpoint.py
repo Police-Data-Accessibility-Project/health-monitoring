@@ -4,7 +4,7 @@ import dotenv
 import requests
 
 from constants import BASE_URL
-from Notifier import MasterNotifier
+from notifier import MasterNotifier
 from webhook_logic import DiscordPoster, SMSNotifier
 
 ENDPOINT_NAME = "Typeahead"

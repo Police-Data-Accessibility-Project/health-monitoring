@@ -3,7 +3,7 @@ import os
 import dotenv
 from playwright.sync_api import sync_playwright
 
-from Notifier import MasterNotifier
+from notifier import MasterNotifier
 from logging_logic import setup_logger
 from webhook_logic import DiscordPoster, SMSNotifier
 

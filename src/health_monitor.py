@@ -2,7 +2,7 @@ import os
 
 import dotenv
 
-from Notifier import MasterNotifier
+from notifier import MasterNotifier
 from check_search_endpoint import check_search_endpoint
 from check_search_webpage import WebpageChecker
 from webhook_logic import DiscordPoster, SMSNotifier
