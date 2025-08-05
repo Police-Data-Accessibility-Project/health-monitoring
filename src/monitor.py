@@ -13,6 +13,7 @@ class HealthMonitor:
         self.webpage_checker = WebpageChecker(notifier)
 
     def run(self):
-        self.webpage_checker.check_webpage()
+        # Deprecated due to high rate of false positives
+        # self.webpage_checker.check_webpage()
         check_search_endpoint(self.notifier)
 
